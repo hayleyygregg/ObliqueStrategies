@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    
+<!--    GOOGLE FONT-->
+    
+    <link href='https://fonts.googleapis.com/css?family=Lato:400,300,100' rel='stylesheet' type='text/css'>
+    
+<!--    REFRESH BUTTON-->
+    
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet"/>
+    
+    <!--VERTICAL FLIP-->
+    
+  <style>
+      
+      /* CSS3 FADE IN http://jsfiddle.net/SO_AMK/VV2ek/ */
+      
+      body {
+          
+          font-family: "Lato", sans-serif;
+        margin: 0;
+          
+      }
+    
+      h1 {
+    margin: auto;
+    font-size: 21px;
+    text-align: center;
+    font-weight: 300;
+
+/*     
+      no need for fades anymore with new flip animation
+          
+          animation: fadein 2s;
+    -moz-animation: fadein 2s;
+    -webkit-animation: fadein 2s;
+          
+          */
+          
+      }
+    
+      @keyframes fadein {
+    from {
+        opacity:0;
+    }
+    to {
+        opacity:1;
+    }
+}
+@-moz-keyframes fadein { /* Firefox */
+    from {
+        opacity:0;
+    }
+    to {
+        opacity:1;
+    }
+}
+@-webkit-keyframes fadein { /* Safari and Chrome */
+    from {
+        opacity:0;
+    }
+    to {
+        opacity:1;
+    }
+}
+@-o-keyframes fadein { /* Opera */
+    from {
+        opacity:0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+      
+     .front, .back /* divs that contain strategies */ {        
+    display: flex;
+    background: white;
+    border-radius: 15px; /* was 6 */
+    margin: 100px auto;
+/*    padding: 0 30px; messing up centering so made the width of front and back bigger instead */
+    box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.29);
+     }
+      
+      
+      /* entire container, keeps perspective */
+.flip-container {
+	perspective: 1000px;
+    margin: auto;
+    position: relative;
+    
+}
+
+      .flip-container .flipper {
+		transform-origin: 100% 213.5px; /* half of height */
+	}
+      
+      .flip-container:hover .flipper {
+		transform: rotateX(-180deg);
+	}
+
+.flip-container, .front, .back {
+    width: 480px; /* was 400 */
+    height: 350px;
+    position: relative;
+    top: 80px;
+}
+
+/* flip speed goes here */
+.flipper {
+	transition: 0.6s;
+	transform-style: preserve-3d;
+	position: relative;
+    
+}
+
+/* hide back of pane during swap */
+.front, .back {
+	backface-visibility: hidden;
+	position: absolute;
+	top: -60px; /* I found the problem! this was 0 which made the animation not flip where it was but move up - 60px fixed it */
+	left: 0;
+}
+
+/* front pane, placed above back */
+.front {
+	z-index: 2;
+	/* for firefox 31 */
+	transform: rotateX(0deg);
+    
+}
+
+/* back, initially hidden pane */
+.back {
+	transform: rotateX(180deg);
+}
+      
+      .refresh {
+          text-align: center;
+          border: 1.5px solid #00d1d9;
+          padding-top: 6px;
+    width: 45px;
+	height: 38px;
+	-moz-border-radius: 50px;
+	-webkit-border-radius: 50px;
+	border-radius: 50px;
+            margin: auto;
+          display: block;
+      }
+      
+      div.refresh-container {
+          
+                position: relative; /* go underneath card */
+          top: 170px; /* was 150 */
+          width: 400px; /* same as card */
+        margin: auto;
+/*          background-color: red;*/
+          
+      }
+      
+      
+      p {
+          
+          text-align: center;
+          font-weight: 300;
+          padding-bottom: 5px;
+          
+      }
+      
+      .main {
+          
+          margin: auto;
+          display: block;
+          width: 500px;
+          
+      }
+      
+      /* spin on refresh http://jsfiddle.net/uevfyghr/1/ */
+      
+      .fa-spin-hover:hover {
+    animation: fa-spin 2s infinite linear;
+}
+@-webkit-keyframes fa-spin{0%{-webkit-transform:rotate(0deg);transform:rotate(0deg)}100%{-webkit-transform:rotate(359deg);transform:rotate(359deg)}}
+@keyframes fa-spin{0%{-webkit-transform:rotate(0deg);transform:rotate(0deg)}100%{-webkit-transform:rotate(359deg);transform:rotate(359deg)}}
+      
+                  footer {
+          
+          position: relative;
+          top: 210px;
+      }
+      
+      footer p {
+          
+          font-size: 0.8em;
+          
+      }
+      
+      a {
+          
+          color: black;
+          text-decoration: none;
+          border-bottom: 1px solid #00d1d9;
+          
+      }
+      
+      a:hover {
+          
+          color: #00d1d9;
+          
+      }
+      
+
+    
+    </style>  
+    
+    
+
+
+</head>
+
+
+<body>
+    
+    <!-- animation from https://davidwalsh.name/css-flip -->
+    
+    <div class="main">
+    
+<div class="flip-container" ontouchstart="this.classList.toggle('hover');">
+    
+    	<div class="flipper">
+            
+		<div class="front">
+			<!-- front content -->
+            <img src="cover.png" alt="Oblique Strategies" style="    border-radius: 15px;">
+            
+		</div>
+		<div class="back">
+			<!-- back content -->
+            
+            <script>
+    
+    //moved to inside body
+    
+    
+    // selecting a random array item
+var selectStrategy = [
+
+"Abandon desire",
+"Abandon normal instructions",
+"Accept advice",
+"Adding on",
+"A line has two sides",
+"Always the first steps",
+"Ask people to work against their better judgement",
+"Ask your body",
+"Be dirty",
+"Be extravagant",
+"Be less critical",
+"Breathe more deeply",
+"Bridges -build -burn",
+"Change ambiguities to specifics",
+"Change nothing and continue consistently",
+"Change specifics to ambiguities",
+"Consider transitions",
+"Courage!",
+"Cut a vital connection",
+"Decorate, decorate",
+"Destroy nothing; destroy the most important thing",
+"Discard an axiom",
+"Disciplined self-indulgence",
+"Discover your formulas and abandon them",
+"Display your talent",
+"Distort time",
+"Do nothing for as long as possible",
+"Don&#8217;t avoid what is easy",
+"Don&#8217;t break the silence",
+"Don&#8217;t stress one thing more than another",
+"Do something boring",
+"Do something sudden, destructive and unpredictable",
+"Do the last thing first",
+"Do the words need changing?",
+"Emphasise differences",
+"Emphasise the flaws",
+"Faced with a choice, do both (From Dieter Rot.)",
+"Find a safe part and use it as an anchor",
+"Give the game away",
+"Give way to your worst impulse",
+"Go outside. Shut the door.",
+"Go to an extreme, come part way back",
+"How would someone else do it?",
+"How would you have done it?",
+"In total darkness, or in a very large room, very quietly",
+"Is it finished?",
+"Is something missing?",
+"Is the style right?",
+"It is simply a matter or work",
+"Just carry on",
+"Listen to the quiet voice",
+"Look at the order in which you do things",
+"Magnify the most difficult details",
+"Make it more sensual",
+"Make what&#8217;s perfect more human",
+"Move towards the unimportant",
+"Not building a wall; making a brick",
+"Once the search has begun, something will be found",
+"Only a part, not the whole",
+"Only one element of each kind",
+"Openly resist change",
+"Pae White&#8217;s non-blank graphic metacard",
+"Question the heroic",
+"Remember quiet evenings",
+"Remove a restriction",
+"Repetition is a form of change",
+"Retrace your steps",
+"Reverse",
+"Simple Subtraction",
+"Slow preparation, fast execution",
+"State the problem as clearly as possible",
+"Take a break",
+"Take away the important parts",
+"The inconsistency principle",
+"The most easily forgotten thing is the most important",
+"Think –inside the work -outside the work",
+"Tidy up",
+"Try faking it (From Stewart Brand.)",
+"Turn it upside down",
+"Use an old idea",
+"Use cliches",
+"Use filters",
+"Use something nearby as a model",
+"Use ‘unqualified&#8217; people",
+"Use your own ideas",
+"Voice your suspicions",
+"Water",
+"What context would look right?",
+"What is the simplest solution?",
+"What mistakes did you make last time?",
+"What to increase? What to reduce? What to maintain?",
+"What were you really thinking about just now?",
+"What wouldn&#8217;t you do?",
+"What would your closest friend do?",
+"When is it for?",
+"Where is the edge?",
+"Which parts can be grouped?",
+"Work at a different speed",
+"Would anyone want it?",
+"Your mistake was a hidden intention",
+"Use fewer notes",
+"Use filters",
+"Use &#8216;unqualified&#8217; people",
+"Water",
+"What are you really thinking about just now? Incorporate",
+"What is the reality of the situation?",
+"What mistakes did you make last time?",
+"What would your closest friend do?",
+"What wouldn&#8217;t you do?",
+"Work at a different speed",
+"You are an engineer",
+"You can only make one dot at a time",
+"You don&#8217;t have to be ashamed of using your own ideas"
+
+
+];
+    
+    var randomQuote = selectStrategy[Math.floor(Math.random() * selectStrategy.length)];
+    
+    
+    document.write("<h1>" + randomQuote + "</h1>");
+    
+    onClick="window.location.reload(true)"
+    
+    //adding reload button
+    
+    
+    </script>
+            
+		</div>
+	</div>
+</div>
+    
+    <div class="refresh-container">
+        
+<p>Refresh for a new strategy!</p>
+    
+    <i class="fa fa-refresh fa-2x fa-spin-hover refresh" onClick="window.location.reload()"></i>
+        
+    </div>
+        
+    </div>
+    
+    
+    <footer>
+    
+        <p>Designed &amp; Coded by <a href="http://hayleygregg.com/index.html">Hayley Gregg</a> &copy;</p>
+    
+    </footer>
+    
+
+
+</body>
+
+
+
+</html>
